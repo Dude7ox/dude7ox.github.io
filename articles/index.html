@@ -31,27 +31,8 @@
 
             <h2 class="section-title">ПОСЛЕДНИЕ ЗАПИСИ</h2>
 
-            <div class="grid">
-                <div class="card">
-                    <div class="icon">[ 003 ]</div>
-                    <h3>Заголовок третьей статьи</h3>
-                    <p>Короткое описание. Пара предложений, чтобы заинтересовать читателя.</p>
-                    <a href="post3.html">Читать →</a>
-                </div>
-
-                <div class="card">
-                    <div class="icon">[ 002 ]</div>
-                    <h3>Заголовок второй статьи</h3>
-                    <p>Ещё одно краткое описание. Можно написать о чём угодно.</p>
-                    <a href="post2.html">Читать →</a>
-                </div>
-
-                <div class="card">
-                    <div class="icon">[ 001 ]</div>
-                    <h3>Заголовок первой статьи</h3>
-                    <p>Самая первая запись. С неё всё началось.</p>
-                    <a href="post1.html">Читать →</a>
-                </div>
+            <div class="grid" id="articlesGrid">
+                <p style="opacity:0.6;font-size:0.85rem;">Загрузка статей…</p>
             </div>
 
             <h2 class="section-title">АРХИВ</h2>
@@ -67,7 +48,44 @@
         </div>
     </div>
 
+    <!-- Подключаем список статей -->
+    <script src="articles.js"></script>
+
     <script>
+        // ==========================================
+        // ОТРИСОВКА ПОСЛЕДНИХ СТАТЕЙ
+        // ==========================================
+        (function renderArticles() {
+            const grid = document.getElementById('articlesGrid');
+            if (!grid) return;
+
+            if (typeof ARTICLES === 'undefined' || !Array.isArray(ARTICLES)) {
+                grid.innerHTML = '<p style="color:#e8c76b;">Не удалось загрузить список статей. Проверьте файл articles.js.</p>';
+                return;
+            }
+
+            grid.innerHTML = '';
+
+            // Сортируем по дате — сначала новые
+            const sorted = ARTICLES.slice().sort((a, b) => b.date.localeCompare(a.date));
+            const lastThree = sorted.slice(0, 3);
+
+            lastThree.forEach(article => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="icon">[ ${article.number} ]</div>
+                    <h3>${article.title}</h3>
+                    <p>${article.description}</p>
+                    <a href="${article.id}.html">Читать →</a>
+                `;
+                grid.appendChild(card);
+            });
+        })();
+
+        // ==========================================
+        // ВОЛНЫ XMB
+        // ==========================================
         const canvas = document.getElementById('xmbCanvas');
         const ctx = canvas.getContext('2d');
         let width, height;

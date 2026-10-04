@@ -24,19 +24,8 @@
         <div class="content">
             <h2 class="section-title">ВСЕ ЗАПИСИ</h2>
 
-            <ul class="archive-list">
-                <li>
-                    <a href="post3.html">Заголовок третьей статьи</a>
-                    <span class="date">2026-10-03</span>
-                </li>
-                <li>
-                    <a href="post2.html">Заголовок второй статьи</a>
-                    <span class="date">2026-10-02</span>
-                </li>
-                <li>
-                    <a href="post1.html">Заголовок первой статьи</a>
-                    <span class="date">2026-10-01</span>
-                </li>
+            <ul class="archive-list" id="archiveList">
+                <li style="opacity:0.6;font-size:0.85rem;">Загрузка архива…</li>
             </ul>
         </div>
 
@@ -45,7 +34,40 @@
         </div>
     </div>
 
+    <!-- Подключаем список статей -->
+    <script src="articles.js"></script>
+
     <script>
+        // ==========================================
+        // ОТРИСОВКА АРХИВА
+        // ==========================================
+        (function renderArchive() {
+            const list = document.getElementById('archiveList');
+            if (!list) return;
+
+            if (typeof ARTICLES === 'undefined' || !Array.isArray(ARTICLES)) {
+                list.innerHTML = '<li style="color:#e8c76b;">Не удалось загрузить архив. Проверьте файл articles.js.</li>';
+                return;
+            }
+
+            list.innerHTML = '';
+
+            // Сортируем по дате — сначала новые
+            const sorted = ARTICLES.slice().sort((a, b) => b.date.localeCompare(a.date));
+
+            sorted.forEach(article => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <a href="${article.id}.html">${article.title}</a>
+                    <span class="date">${article.date}</span>
+                `;
+                list.appendChild(li);
+            });
+        })();
+
+        // ==========================================
+        // ВОЛНЫ XMB
+        // ==========================================
         const canvas = document.getElementById('xmbCanvas');
         const ctx = canvas.getContext('2d');
         let width, height;
