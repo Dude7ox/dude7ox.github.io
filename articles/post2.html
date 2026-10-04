@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Статьи · Dude7ox</title>
+    <title>Заголовок второй статьи · Dude7ox</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -12,54 +12,35 @@
         <div class="header-wrapper">
             <canvas id="xmbCanvas"></canvas>
             <div class="header">
-                <h1>▓▒░ СТАТЬИ ░▒▓</h1>
-                <p>ЗАМЕТКИ · МЫСЛИ · ТЕКСТЫ</p>
+                <h1>▓▒░ СТАТЬЯ ░▒▓</h1>
+                <p>Dude7ox · 2026-10-02</p>
             </div>
         </div>
 
         <div class="breadcrumb">
-            <a href="../index.html">← На главную</a>
+            <a href="../index.html">← На главную</a> · <a href="index.html">К статьям</a>
         </div>
 
         <div class="content">
-            <section class="hero">
-                <p>
-                    Здесь я публикую статьи и заметки. Ниже — последние записи.
-                    Полный список можно посмотреть в <a href="archive.html">архиве</a>.
-                </p>
-            </section>
-
-            <h2 class="section-title">ПОСЛЕДНИЕ ЗАПИСИ</h2>
-
-            <div class="grid">
-                <div class="card">
-                    <div class="icon">[ 003 ]</div>
-                    <h3>Заголовок третьей статьи</h3>
-                    <p>Короткое описание. Пара предложений, чтобы заинтересовать читателя.</p>
-                    <a href="post3.html">Читать →</a>
+            <article>
+                <header class="post-header">
+                    <h2>Заголовок второй статьи</h2>
+                    <div class="post-meta">2026-10-02 · Dude7ox</div>
+                </header>
+                <div class="post-body">
+                    <p>
+                        Текст второй статьи. Можно писать обычные абзацы — они будут
+                        выглядеть как в терминале.
+                    </p>
+                    <p>
+                        Ссылки оформляются так: <a href="https://github.com/dude-7ox" target="_blank">вот пример</a>.
+                    </p>
                 </div>
-
-                <div class="card">
-                    <div class="icon">[ 002 ]</div>
-                    <h3>Заголовок второй статьи</h3>
-                    <p>Ещё одно краткое описание. Можно написать о чём угодно.</p>
-                    <a href="post2.html">Читать →</a>
-                </div>
-
-                <div class="card">
-                    <div class="icon">[ 001 ]</div>
-                    <h3>Заголовок первой статьи</h3>
-                    <p>Самая первая запись. С неё всё началось.</p>
-                    <a href="post1.html">Читать →</a>
-                </div>
-            </div>
-
-            <h2 class="section-title">АРХИВ</h2>
-            <section class="hero">
-                <p>
-                    Хочешь посмотреть всё сразу? <a href="archive.html">Открыть архив всех статей →</a>
-                </p>
-            </section>
+                <nav class="post-nav">
+                    <a href="post1.html">← Предыдущая</a>
+                    <a href="post3.html">Следующая →</a>
+                </nav>
+            </article>
         </div>
 
         <div class="footer">
