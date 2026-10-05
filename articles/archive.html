@@ -11,9 +11,33 @@
     <div class="container">
         <div class="header-wrapper">
             <canvas id="xmbCanvas"></canvas>
+
+            <div class="cover-top">
+                <span>DUDE7OX.PERSONAL</span>
+                <span>V.1.0 / 2026</span>
+            </div>
+
             <div class="header">
-                <h1>▓▒░ АРХИВ СТАТЕЙ ░▒▓</h1>
-                <p>ВСЕ ЗАПИСИ В ОДНОМ МЕСТЕ</p>
+                <div class="jp-strip">
+                    <span class="jp-vertical">全記事</span>
+                    <span class="jp-mark">ARCHIVE</span>
+                </div>
+
+                <div class="brand">
+                    <span class="brand-eyebrow">◆ ARCHIVE ◆</span>
+                    <h1>АРХИВ</h1>
+                    <span class="brand-sub">ВСЕ ЗАПИСИ В ОДНОМ МЕСТЕ</span>
+                </div>
+
+                <div class="cover-label">
+                    <span>EST. 2026</span>
+                    <span>RUS / EN</span>
+                    <span>◆◆◆</span>
+                </div>
+            </div>
+
+            <div class="cover-bottom">
+                <span>SYS: READY</span>
             </div>
         </div>
 
@@ -22,7 +46,10 @@
         </div>
 
         <div class="content">
-            <h2 class="section-title">ВСЕ ЗАПИСИ</h2>
+            <h2 class="section-title">
+                ВСЕ ЗАПИСИ
+                <span class="jp-inline">目録</span>
+            </h2>
 
             <ul class="archive-list" id="archiveList">
                 <li style="opacity:0.6;font-size:0.85rem;">Загрузка архива…</li>
@@ -34,19 +61,15 @@
         </div>
     </div>
 
-    <!-- Подключаем список статей -->
     <script src="articles.js"></script>
 
     <script>
-        // ==========================================
-        // ОТРИСОВКА АРХИВА
-        // ==========================================
         (function renderArchive() {
             const list = document.getElementById('archiveList');
             if (!list) return;
 
             if (typeof ARTICLES === 'undefined' || !Array.isArray(ARTICLES)) {
-                list.innerHTML = '<li style="color:#e8c76b;">Не удалось загрузить архив. Проверьте файл articles.js.</li>';
+                list.innerHTML = '<li style="color:#e8553a;">Не удалось загрузить архив. Проверьте файл articles.js.</li>';
                 return;
             }
 
@@ -64,9 +87,6 @@
             });
         })();
 
-        // ==========================================
-        // ВОЛНЫ XMB
-        // ==========================================
         const canvas = document.getElementById('xmbCanvas');
         const ctx = canvas.getContext('2d');
         let width, height;
@@ -85,13 +105,12 @@
         window.addEventListener('resize', resize);
 
         const waves = [
-            { frequency: 0.004, amplitude: 22, speed:  0.012, opacity: 0.22, phaseShift: 0,             baseHeight: 0.55 },
-            { frequency: 0.006, amplitude: 16, speed: -0.009, opacity: 0.16, phaseShift: Math.PI / 3,   baseHeight: 0.70 },
-            { frequency: 0.003, amplitude: 28, speed:  0.006, opacity: 0.12, phaseShift: Math.PI / 1.5, baseHeight: 0.85 }
+            { frequency: 0.004, amplitude: 18, speed:  0.010, opacity: 0.18, phaseShift: 0,             baseHeight: 0.50 },
+            { frequency: 0.006, amplitude: 14, speed: -0.008, opacity: 0.12, phaseShift: Math.PI / 3,   baseHeight: 0.68 },
+            { frequency: 0.003, amplitude: 24, speed:  0.005, opacity: 0.09, phaseShift: Math.PI / 1.5, baseHeight: 0.85 }
         ];
 
-        const WAVE_COLOR = 'rgba(143, 188, 212, ';
-
+        const WAVE_COLOR = 'rgba(91, 184, 232, ';
         let increment = 0;
 
         function animate() {

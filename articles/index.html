@@ -11,9 +11,33 @@
     <div class="container">
         <div class="header-wrapper">
             <canvas id="xmbCanvas"></canvas>
+
+            <div class="cover-top">
+                <span>DUDE7OX.PERSONAL</span>
+                <span>V.1.0 / 2026</span>
+            </div>
+
             <div class="header">
-                <h1>▓▒░ СТАТЬИ ░▒▓</h1>
-                <p>ЗАМЕТКИ · МЫСЛИ · ТЕКСТЫ</p>
+                <div class="jp-strip">
+                    <span class="jp-vertical">記事一覧</span>
+                    <span class="jp-mark">ARTICLES</span>
+                </div>
+
+                <div class="brand">
+                    <span class="brand-eyebrow">◆ ARTICLES ◆</span>
+                    <h1>СТАТЬИ</h1>
+                    <span class="brand-sub">ЗАМЕТКИ · МЫСЛИ · ТЕКСТЫ</span>
+                </div>
+
+                <div class="cover-label">
+                    <span>EST. 2026</span>
+                    <span>RUS / EN</span>
+                    <span>◆◆◆</span>
+                </div>
+            </div>
+
+            <div class="cover-bottom">
+                <span>SYS: READY</span>
             </div>
         </div>
 
@@ -29,13 +53,19 @@
                 </p>
             </section>
 
-            <h2 class="section-title">ПОСЛЕДНИЕ ЗАПИСИ</h2>
+            <h2 class="section-title">
+                ПОСЛЕДНИЕ ЗАПИСИ
+                <span class="jp-inline">最新</span>
+            </h2>
 
             <div class="grid" id="articlesGrid">
                 <p style="opacity:0.6;font-size:0.85rem;">Загрузка статей…</p>
             </div>
 
-            <h2 class="section-title">АРХИВ</h2>
+            <h2 class="section-title">
+                АРХИВ
+                <span class="jp-inline">全記事</span>
+            </h2>
             <section class="hero">
                 <p>
                     Хочешь посмотреть всё сразу? <a href="archive.html">Открыть архив всех статей →</a>
@@ -48,19 +78,15 @@
         </div>
     </div>
 
-    <!-- Подключаем список статей -->
     <script src="articles.js"></script>
 
     <script>
-        // ==========================================
-        // ОТРИСОВКА ПОСЛЕДНИХ СТАТЕЙ
-        // ==========================================
         (function renderArticles() {
             const grid = document.getElementById('articlesGrid');
             if (!grid) return;
 
             if (typeof ARTICLES === 'undefined' || !Array.isArray(ARTICLES)) {
-                grid.innerHTML = '<p style="color:#e8c76b;">Не удалось загрузить список статей. Проверьте файл articles.js.</p>';
+                grid.innerHTML = '<p style="color:#e8553a;">Не удалось загрузить список статей. Проверьте файл articles.js.</p>';
                 return;
             }
 
@@ -82,9 +108,6 @@
             });
         })();
 
-        // ==========================================
-        // ВОЛНЫ XMB
-        // ==========================================
         const canvas = document.getElementById('xmbCanvas');
         const ctx = canvas.getContext('2d');
         let width, height;
@@ -103,13 +126,12 @@
         window.addEventListener('resize', resize);
 
         const waves = [
-            { frequency: 0.004, amplitude: 22, speed:  0.012, opacity: 0.22, phaseShift: 0,             baseHeight: 0.55 },
-            { frequency: 0.006, amplitude: 16, speed: -0.009, opacity: 0.16, phaseShift: Math.PI / 3,   baseHeight: 0.70 },
-            { frequency: 0.003, amplitude: 28, speed:  0.006, opacity: 0.12, phaseShift: Math.PI / 1.5, baseHeight: 0.85 }
+            { frequency: 0.004, amplitude: 18, speed:  0.010, opacity: 0.18, phaseShift: 0,             baseHeight: 0.50 },
+            { frequency: 0.006, amplitude: 14, speed: -0.008, opacity: 0.12, phaseShift: Math.PI / 3,   baseHeight: 0.68 },
+            { frequency: 0.003, amplitude: 24, speed:  0.005, opacity: 0.09, phaseShift: Math.PI / 1.5, baseHeight: 0.85 }
         ];
 
-        const WAVE_COLOR = 'rgba(143, 188, 212, ';
-
+        const WAVE_COLOR = 'rgba(91, 184, 232, ';
         let increment = 0;
 
         function animate() {

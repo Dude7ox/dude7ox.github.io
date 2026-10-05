@@ -11,9 +11,33 @@
     <div class="container">
         <div class="header-wrapper">
             <canvas id="xmbCanvas"></canvas>
+
+            <div class="cover-top">
+                <span>DUDE7OX.PERSONAL</span>
+                <span>V.1.0 / 2026</span>
+            </div>
+
             <div class="header">
-                <h1>▓▒░ СТАТЬЯ ░▒▓</h1>
-                <p>Dude7ox · 2026-10-02</p>
+                <div class="jp-strip">
+                    <span class="jp-vertical">記事</span>
+                    <span class="jp-mark">2026-10-02</span>
+                </div>
+
+                <div class="brand">
+                    <span class="brand-eyebrow">◆ ARTICLE ◆</span>
+                    <h1>СТАТЬЯ</h1>
+                    <span class="brand-sub">Dude7ox · 2026-10-02</span>
+                </div>
+
+                <div class="cover-label">
+                    <span>EST. 2026</span>
+                    <span>RUS / EN</span>
+                    <span>◆◆◆</span>
+                </div>
+            </div>
+
+            <div class="cover-bottom">
+                <span>SYS: READY</span>
             </div>
         </div>
 
@@ -30,7 +54,7 @@
                 <div class="post-body">
                     <p>
                         Текст второй статьи. Можно писать обычные абзацы — они будут
-                        выглядеть как в терминале.
+                        выглядеть в стиле терминала.
                     </p>
                     <p>
                         Ссылки оформляются так: <a href="https://github.com/dude-7ox" target="_blank">вот пример</a>.
@@ -49,9 +73,6 @@
     </div>
 
     <script>
-        // ==========================================
-        // ВОЛНЫ XMB
-        // ==========================================
         const canvas = document.getElementById('xmbCanvas');
         const ctx = canvas.getContext('2d');
         let width, height;
@@ -70,13 +91,12 @@
         window.addEventListener('resize', resize);
 
         const waves = [
-            { frequency: 0.004, amplitude: 22, speed:  0.012, opacity: 0.22, phaseShift: 0,             baseHeight: 0.55 },
-            { frequency: 0.006, amplitude: 16, speed: -0.009, opacity: 0.16, phaseShift: Math.PI / 3,   baseHeight: 0.70 },
-            { frequency: 0.003, amplitude: 28, speed:  0.006, opacity: 0.12, phaseShift: Math.PI / 1.5, baseHeight: 0.85 }
+            { frequency: 0.004, amplitude: 18, speed:  0.010, opacity: 0.18, phaseShift: 0,             baseHeight: 0.50 },
+            { frequency: 0.006, amplitude: 14, speed: -0.008, opacity: 0.12, phaseShift: Math.PI / 3,   baseHeight: 0.68 },
+            { frequency: 0.003, amplitude: 24, speed:  0.005, opacity: 0.09, phaseShift: Math.PI / 1.5, baseHeight: 0.85 }
         ];
 
-        const WAVE_COLOR = 'rgba(143, 188, 212, ';
-
+        const WAVE_COLOR = 'rgba(91, 184, 232, ';
         let increment = 0;
 
         function animate() {
