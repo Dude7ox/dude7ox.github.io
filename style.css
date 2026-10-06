@@ -1,39 +1,228 @@
 /* ==========================================================
    style.css — Dude7ox
-   Тема: Electrosphere на тёмном — японский техно-минимализм
+   Пять тем. «Ночь» — по умолчанию, на базе Electrosphere-дизайна
+   с белыми волнами. Переключатель — ромбики в строке cover-top.
    ========================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Dela+Gothic+One&family=Space+Mono:wght@400;700&display=swap');
 
-/* ---------- Переменные ---------- */
-:root {
-    --bg:         #0d1014;
-    --paper:      #171b20;
-    --paper-deep: #0a0d11;
-    --ink:        #e8e4d8;
-    --ink-soft:   #a5a096;
-    --ink-faint:  #6b6960;
-    --line:       #e8e4d8;
-    --line-soft:  rgba(232, 228, 216, 0.16);
-    --blue:       #5bb8e8;
-    --blue-deep:  #1c5a85;
-    --red:        #e8553a;
-    --yellow:     #f7e94a;
-    --font-display: 'Anton', 'Dela Gothic One', sans-serif;
-    --font-jp:      'Dela Gothic One', sans-serif;
-    --font-mono:    'Space Mono', monospace;
+/* ==========================================================
+   1. ТЕМЫ
+   ========================================================== */
 
-    /* Алиасы для старых имён (используются в post1.html inline-стилях) */
+/* --- NIGHT: ночь (по умолчанию) --- */
+:root, [data-theme="night"] {
+    --bg:               #0d1014;
+    --bg-grid:          rgba(232, 228, 216, 0.04);
+    --bg-deep:          #0a0d11;
+
+    --panel:            #171b20;
+    --panel-soft:       #0a0d11;
+    --panel-hover:      #1c2026;
+    --panel-backdrop:   none;
+    --container-shadow: 6px 6px 0 0 #000;
+
+    --line:             #e8e4d8;
+    --line-soft:        rgba(232, 228, 216, 0.16);
+    --line-faint:       rgba(232, 228, 216, 0.08);
+
+    --ink:              #e8e4d8;
+    --ink-soft:         #a5a096;
+    --ink-faint:        #6b6960;
+
+    --accent:           #5bb8e8;
+    --accent-2:         #e8553a;
+    --accent-3:         #f7e94a;
+    --accent-ink:       #0d1014;
+    --glow-soft:        rgba(91, 184, 232, 0.35);
+    --brand-glow:       none;
+
+    --jp-strip-bg:      #e8e4d8;
+    --jp-strip-fg:      #0d1014;
+    --jp-mark:          #e8553a;
+
+    /* волны белые — как просили (в оригинале были голубые) */
+    --wave-rgb:         255, 255, 255;
+    --canvas-opacity:   0.75;
+}
+
+/* --- SEA: морская волна --- */
+[data-theme="sea"] {
+    --bg:               #0b4f52;
+    --bg-grid:          rgba(255, 255, 255, 0.035);
+    --bg-deep:          #083a3d;
+
+    --panel:            rgba(200, 212, 214, 0.06);
+    --panel-soft:       rgba(200, 212, 214, 0.04);
+    --panel-hover:      rgba(220, 232, 234, 0.14);
+    --panel-backdrop:   blur(18px) saturate(120%);
+    --container-shadow: 0 0 0 1px rgba(255,255,255,0.05),
+                        0 24px 60px -20px rgba(0,0,0,0.5),
+                        inset 0 1px 0 rgba(255,255,255,0.08);
+
+    --line:             rgba(255, 255, 255, 0.55);
+    --line-soft:        rgba(255, 255, 255, 0.22);
+    --line-faint:       rgba(255, 255, 255, 0.10);
+
+    --ink:              #eef6f6;
+    --ink-soft:         #b9cdcf;
+    --ink-faint:        #7e9b9d;
+
+    --accent:           #8fefef;
+    --accent-2:         #ff8a6b;
+    --accent-3:         #ffe17a;
+    --accent-ink:       #0b4f52;
+    --glow-soft:        rgba(143, 239, 239, 0.45);
+    --brand-glow:       0 0 24px rgba(143, 239, 239, 0.35),
+                        0 2px 0 rgba(0,0,0,0.15);
+
+    --jp-strip-bg:      rgba(255, 255, 255, 0.9);
+    --jp-strip-fg:      #0b4f52;
+    --jp-mark:          #c14a2c;
+
+    --wave-rgb:         255, 255, 255;
+    --canvas-opacity:   0.9;
+}
+
+/* --- COFFEE: кофе с молоком --- */
+[data-theme="coffee"] {
+    --bg:               #f3dcba;
+    --bg-grid:          rgba(120, 70, 20, 0.08);
+    --bg-deep:          #e6cba0;
+
+    --panel:            rgba(255, 250, 240, 0.55);
+    --panel-soft:       rgba(255, 250, 240, 0.35);
+    --panel-hover:      rgba(255, 250, 240, 0.85);
+    --panel-backdrop:   blur(16px) saturate(120%);
+    --container-shadow: 0 0 0 1px rgba(120, 70, 20, 0.08),
+                        0 24px 60px -24px rgba(90, 50, 10, 0.35),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+
+    --line:             rgba(120, 70, 25, 0.55);
+    --line-soft:        rgba(120, 70, 25, 0.28);
+    --line-faint:       rgba(120, 70, 25, 0.14);
+
+    --ink:              #3d2714;
+    --ink-soft:         #6b5238;
+    --ink-faint:        #a08768;
+
+    --accent:           #b85c1c;
+    --accent-2:         #8a3c12;
+    --accent-3:         #d99a3a;
+    --accent-ink:       #fff5e6;
+    --glow-soft:        rgba(184, 92, 28, 0.35);
+    --brand-glow:       0 0 22px rgba(184, 92, 28, 0.25),
+                        0 2px 0 rgba(120, 70, 25, 0.15);
+
+    --jp-strip-bg:      #3d2714;
+    --jp-strip-fg:      #f3dcba;
+    --jp-mark:          #d99a3a;
+
+    --wave-rgb:         120, 70, 25;
+    --canvas-opacity:   0.55;
+}
+
+/* --- WINE: бордовый --- */
+[data-theme="wine"] {
+    --bg:               #3b0d1a;
+    --bg-grid:          rgba(255, 200, 210, 0.05);
+    --bg-deep:          #2a0812;
+
+    --panel:            rgba(255, 200, 210, 0.06);
+    --panel-soft:       rgba(255, 200, 210, 0.04);
+    --panel-hover:      rgba(255, 200, 210, 0.14);
+    --panel-backdrop:   blur(18px) saturate(120%);
+    --container-shadow: 0 0 0 1px rgba(255, 200, 210, 0.08),
+                        0 24px 60px -20px rgba(0, 0, 0, 0.6),
+                        inset 0 1px 0 rgba(255, 200, 210, 0.10);
+
+    --line:             rgba(255, 220, 225, 0.55);
+    --line-soft:        rgba(255, 220, 225, 0.22);
+    --line-faint:       rgba(255, 220, 225, 0.10);
+
+    --ink:              #fbe8ec;
+    --ink-soft:         #d4a8b2;
+    --ink-faint:        #9a6a75;
+
+    --accent:           #ff8a9a;
+    --accent-2:         #ffc46b;
+    --accent-3:         #ffd9c4;
+    --accent-ink:       #3b0d1a;
+    --glow-soft:        rgba(255, 138, 154, 0.45);
+    --brand-glow:       0 0 24px rgba(255, 138, 154, 0.35),
+                        0 2px 0 rgba(0,0,0,0.25);
+
+    --jp-strip-bg:      rgba(255, 230, 235, 0.92);
+    --jp-strip-fg:      #3b0d1a;
+    --jp-mark:          #b8494a;
+
+    --wave-rgb:         255, 190, 200;
+    --canvas-opacity:   0.85;
+}
+
+/* --- LIGHT: очень светло-серый с чёрными волнами --- */
+[data-theme="light"] {
+    --bg:               #e8e8e8;
+    --bg-grid:          rgba(0, 0, 0, 0.06);
+    --bg-deep:          #d8d8d8;
+
+    --panel:            #f4f4f4;
+    --panel-soft:       #ececec;
+    --panel-hover:      #ffffff;
+    --panel-backdrop:   none;
+    --container-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06),
+                        0 24px 60px -24px rgba(0, 0, 0, 0.2);
+
+    --line:             rgba(0, 0, 0, 0.75);
+    --line-soft:        rgba(0, 0, 0, 0.28);
+    --line-faint:       rgba(0, 0, 0, 0.14);
+
+    --ink:              #111111;
+    --ink-soft:         #4a4a4a;
+    --ink-faint:        #8a8a8a;
+
+    --accent:           #111111;
+    --accent-2:         #666666;
+    --accent-3:         #333333;
+    --accent-ink:       #f4f4f4;
+    --glow-soft:        rgba(0, 0, 0, 0.25);
+    --brand-glow:       none;
+
+    --jp-strip-bg:      #111111;
+    --jp-strip-fg:      #f4f4f4;
+    --jp-mark:          #bbbbbb;
+
+    --wave-rgb:         0, 0, 0;
+    --canvas-opacity:   1;
+}
+
+/* Алиасы старых имён */
+:root,
+[data-theme] {
     --bg-color:       var(--bg);
     --border-color:   var(--line);
     --text-main:      var(--ink-soft);
     --text-highlight: var(--ink);
-    --accent-blue:    var(--blue);
-    --accent-glow:    var(--blue-deep);
-    --accent-yellow:  var(--yellow);
+    --accent-blue:    var(--accent);
+    --accent-glow:    var(--accent);
+    --accent-yellow:  var(--accent-3);
+    --blue:           var(--accent);
+    --red:            var(--accent-2);
+    --yellow:         var(--accent-3);
+    --paper:          var(--panel);
+    --paper-deep:     var(--panel-soft);
+    --glass:          var(--panel);
+    --glass-soft:     var(--panel-soft);
+    --glass-hover:    var(--panel-hover);
+
+    --font-display: 'Anton', 'Dela Gothic One', sans-serif;
+    --font-jp:      'Dela Gothic One', sans-serif;
+    --font-mono:    'Space Mono', monospace;
 }
 
-/* ---------- База ---------- */
+/* ==========================================================
+   2. БАЗА
+   ========================================================== */
 * { box-sizing: border-box; }
 
 html, body {
@@ -50,6 +239,7 @@ html, body {
 body {
     padding: 24px;
     position: relative;
+    transition: background 0.25s ease, color 0.25s ease;
 }
 
 body::before {
@@ -57,31 +247,36 @@ body::before {
     position: fixed;
     inset: 0;
     background-image:
-        linear-gradient(rgba(232,228,216,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(232,228,216,0.04) 1px, transparent 1px);
-    background-size: 32px 32px;
+        linear-gradient(var(--bg-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px);
+    background-size: 40px 40px, 40px 40px;
     pointer-events: none;
     z-index: 0;
 }
 
-/* ---------- Контейнер ---------- */
+/* ==========================================================
+   3. КОНТЕЙНЕР
+   ========================================================== */
 .container {
     max-width: 1100px;
     margin: 0 auto;
-    background: var(--paper);
+    background: var(--panel);
     border: 1px solid var(--line);
     position: relative;
     z-index: 1;
-    box-shadow: 6px 6px 0 0 #000;
+    backdrop-filter: var(--panel-backdrop);
+    -webkit-backdrop-filter: var(--panel-backdrop);
+    box-shadow: var(--container-shadow);
+    transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 /* ==========================================================
-   ШАПКА-ОБЛОЖКА
+   4. ШАПКА-ОБЛОЖКА
    ========================================================== */
 .header-wrapper {
     position: relative;
-    background: var(--paper);
-    border-bottom: 2px solid var(--line);
+    background: transparent;
+    border-bottom: 1px solid var(--line);
     overflow: hidden;
 }
 
@@ -92,7 +287,8 @@ body::before {
     height: 100%;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.75;
+    opacity: var(--canvas-opacity);
+    transition: opacity 0.25s ease;
 }
 
 .cover-top,
@@ -109,31 +305,105 @@ body::before {
     z-index: 2;
 }
 
-.cover-top {
-    border-bottom: 1px solid var(--line-soft);
+.cover-top-right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
 }
 
-.cover-top span:first-child::before {
+.cover-top {
+    border-bottom: 1px solid var(--line-faint);
+}
+
+.cover-top > span:first-child::before {
     content: "◆ ";
-    color: var(--red);
+    color: var(--accent-2);
 }
 
 .cover-bottom {
-    border-top: 1px solid var(--line-soft);
+    border-top: 1px solid var(--line-faint);
     justify-content: flex-end;
 }
 
 .cover-bottom span:last-child::before {
     content: "";
     display: inline-block;
-    width: 8px;
-    height: 8px;
-    background: var(--blue);
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
     margin-right: 8px;
     vertical-align: middle;
     transform: translateY(-1px);
+    box-shadow: 0 0 8px var(--accent);
 }
 
+/* ==========================================================
+   5. ПЕРЕКЛЮЧАТЕЛЬ ТЕМ — ромбики
+   ========================================================== */
+.theme-switcher {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 0 2px;
+}
+
+.theme-btn {
+    width: 9px;
+    height: 9px;
+    padding: 0;
+    margin: 0;
+    border: 1px solid rgba(0, 0, 0, 0.85);
+    background: currentColor;
+    cursor: pointer;
+    border-radius: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    transform: rotate(45deg);
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+}
+
+.theme-btn:hover {
+    transform: rotate(45deg) scale(1.3);
+    border-color: #000;
+}
+
+.theme-btn:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+}
+
+.theme-btn.active {
+    border-color: #000;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.9),
+                0 0 0 2.5px currentColor;
+}
+
+/* Цвет каждого ромбика — светлейший из двух ключевых цветов темы */
+    /* Цвет каждого ромбика — светлейший из двух ключевых цветов темы */
+    .theme-btn[data-theme-target="night"] {
+        color: #2a2f38;
+    }
+    /* тёмно-серый вместо чёрного */
+    .theme-btn[data-theme-target="sea"] {
+        color: #8fefef;
+    }
+
+    .theme-btn[data-theme-target="coffee"] {
+        color: #f3dcba;
+    }
+
+    .theme-btn[data-theme-target="wine"] {
+        color: #ff8a9a;
+    }
+
+    .theme-btn[data-theme-target="light"] {
+        color: #e8e8e8;
+    }
+
+/* ==========================================================
+   6. ШАПКА — ОСТАЛЬНОЕ
+   ========================================================== */
 .header {
     display: grid;
     grid-template-columns: auto 1fr auto;
@@ -144,15 +414,16 @@ body::before {
     z-index: 2;
 }
 
-/* Вертикальная японская полоса */
 .jp-strip {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 12px;
     padding: 10px 8px;
-    background: var(--ink);
-    color: var(--bg);
+    background: var(--jp-strip-bg);
+    color: var(--jp-strip-fg);
+    border: 1px solid var(--line-soft);
+    transition: background 0.25s ease, color 0.25s ease;
 }
 
 .jp-strip .jp-vertical {
@@ -162,20 +433,19 @@ body::before {
     font-size: 0.95rem;
     letter-spacing: 0.15em;
     line-height: 1;
-    color: var(--bg);
+    color: var(--jp-strip-fg);
 }
 
 .jp-strip .jp-mark {
     font-family: var(--font-mono);
     font-size: 0.6rem;
     letter-spacing: 2px;
-    color: var(--red);
+    color: var(--jp-mark);
     writing-mode: vertical-rl;
     text-orientation: mixed;
     transform: rotate(180deg);
 }
 
-/* Центральный бренд */
 .brand {
     display: flex;
     flex-direction: column;
@@ -191,7 +461,7 @@ body::before {
     font-size: 0.68rem;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: var(--red);
+    color: var(--accent-2);
 }
 
 .brand h1 {
@@ -206,6 +476,8 @@ body::before {
     transform: scaleY(1.05);
     transform-origin: center;
     white-space: nowrap;
+    text-shadow: var(--brand-glow);
+    transition: color 0.25s ease, text-shadow 0.25s ease;
 }
 
 .brand .brand-sub {
@@ -235,7 +507,9 @@ body::before {
     font-weight: 700;
 }
 
-/* ---------- Навигация ---------- */
+/* ==========================================================
+   7. НАВИГАЦИЯ / КРОШКИ
+   ========================================================== */
 .nav {
     display: flex;
     justify-content: center;
@@ -245,9 +519,10 @@ body::before {
     font-size: 0.72rem;
     letter-spacing: 2.5px;
     text-transform: uppercase;
-    background: var(--paper-deep);
+    background: var(--panel-soft);
     position: relative;
     z-index: 2;
+    transition: background 0.25s ease, border-color 0.25s ease;
 }
 
 .nav a {
@@ -260,14 +535,13 @@ body::before {
 
 .nav a:hover,
 .nav a.active {
-    border-bottom-color: var(--red);
-    color: var(--red);
+    border-bottom-color: var(--accent-2);
+    color: var(--accent-2);
 }
 
-/* ---------- Хлебные крошки ---------- */
 .breadcrumb {
     padding: 14px 30px;
-    border-bottom: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-faint);
     font-size: 0.72rem;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -284,24 +558,28 @@ body::before {
 }
 
 .breadcrumb a:hover {
-    border-bottom-color: var(--ink);
-    color: var(--red);
+    border-bottom-color: var(--accent-2);
+    color: var(--accent-2);
 }
 
-/* ---------- Контент ---------- */
+/* ==========================================================
+   8. КОНТЕНТ / HERO / SECTION
+   ========================================================== */
 .content {
     padding: 36px 40px;
     position: relative;
     z-index: 2;
 }
 
-/* ---------- Hero ---------- */
 .hero {
     border: 1px solid var(--line);
-    background: var(--paper);
+    background: var(--panel);
     padding: 26px 28px;
     margin-bottom: 32px;
     position: relative;
+    backdrop-filter: var(--panel-backdrop);
+    -webkit-backdrop-filter: var(--panel-backdrop);
+    transition: background 0.25s ease, border-color 0.25s ease;
 }
 
 .hero::before {
@@ -309,7 +587,7 @@ body::before {
     position: absolute;
     top: 10px;
     right: 14px;
-    color: var(--red);
+    color: var(--accent-2);
     font-size: 0.8rem;
 }
 
@@ -336,21 +614,21 @@ body::before {
 .content a {
     color: var(--ink);
     text-decoration: none;
-    border-bottom: 1px solid var(--ink);
+    border-bottom: 1px solid var(--line);
     transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 
 .hero a:hover,
 .content a:hover {
-    background: var(--blue);
-    color: var(--bg);
-    border-bottom-color: var(--blue);
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-bottom-color: var(--accent);
 }
 
 .cursor::after {
     content: "▮";
     margin-left: 2px;
-    color: var(--red);
+    color: var(--accent-2);
     animation: blink 1s steps(1) infinite;
 }
 
@@ -359,7 +637,6 @@ body::before {
     50%, 100% { opacity: 0; }
 }
 
-/* ---------- Заголовок секции ---------- */
 .section-title {
     font-family: var(--font-display);
     font-size: 1.1rem;
@@ -377,7 +654,7 @@ body::before {
 
 .section-title::before {
     content: "▎";
-    color: var(--red);
+    color: var(--accent-2);
     font-family: var(--font-mono);
     font-weight: normal;
 }
@@ -391,7 +668,7 @@ body::before {
 }
 
 /* ==========================================================
-   ХАБ (главная)
+   9. ХАБ
    ========================================================== */
 .hub-grid {
     display: grid;
@@ -399,7 +676,8 @@ body::before {
     gap: 0;
     margin-bottom: 0;
     border: 1px solid var(--line);
-    background: var(--paper);
+    background: var(--panel);
+    transition: background 0.25s ease, border-color 0.25s ease;
 }
 
 .hub-card {
@@ -410,7 +688,7 @@ body::before {
     border-right: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
     position: relative;
-    transition: background 0.15s, color 0.15s;
+    transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
     overflow: hidden;
 }
 
@@ -422,15 +700,16 @@ body::before {
     top: 22px;
     right: 22px;
     font-size: 1rem;
-    color: var(--red);
+    color: var(--accent-2);
     opacity: 0;
     transition: opacity 0.15s, transform 0.15s;
     transform: translateX(-6px);
 }
 
 .hub-card:hover {
-    background: var(--ink);
-    color: var(--bg);
+    background: var(--panel-hover);
+    box-shadow: inset 0 0 0 1px var(--line-soft),
+                0 0 40px -10px var(--glow-soft);
 }
 
 .hub-card:hover::before {
@@ -442,11 +721,11 @@ body::before {
     font-size: 0.7rem;
     letter-spacing: 2.5px;
     margin-bottom: 18px;
-    color: var(--red);
+    color: var(--accent-2);
     text-transform: uppercase;
 }
 
-.hub-card:hover .hub-icon { color: var(--blue); }
+.hub-card:hover .hub-icon { color: var(--accent); }
 
 .hub-card h3 {
     margin: 0 0 12px 0;
@@ -466,10 +745,10 @@ body::before {
     color: var(--ink-soft);
 }
 
-.hub-card:hover p { color: rgba(13, 16, 20, 0.75); }
+.hub-card:hover p { color: var(--ink); }
 
 /* ==========================================================
-   КАРТОЧКИ СТАТЕЙ
+   10. КАРТОЧКИ СТАТЕЙ
    ========================================================== */
 .grid {
     display: grid;
@@ -479,23 +758,27 @@ body::before {
 }
 
 .card {
-    background: var(--paper);
+    background: var(--panel);
     border: 1px solid var(--line);
     padding: 20px 18px;
     position: relative;
-    transition: box-shadow 0.15s, transform 0.15s, border-color 0.15s;
+    transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s, background 0.25s;
+    backdrop-filter: var(--panel-backdrop);
+    -webkit-backdrop-filter: var(--panel-backdrop);
 }
 
 .card:hover {
-    box-shadow: 4px 4px 0 0 var(--blue);
-    border-color: var(--blue);
-    transform: translate(-2px, -2px);
+    background: var(--panel-hover);
+    box-shadow: 0 0 0 1px var(--line-soft),
+                0 12px 40px -12px var(--glow-soft);
+    border-color: var(--accent);
+    transform: translateY(-3px);
 }
 
 .card .icon {
     font-size: 0.7rem;
     letter-spacing: 2.5px;
-    color: var(--red);
+    color: var(--accent-2);
     margin-bottom: 12px;
     text-transform: uppercase;
 }
@@ -525,18 +808,18 @@ body::before {
     font-size: 0.72rem;
     letter-spacing: 2px;
     text-transform: uppercase;
-    border-bottom: 1px solid var(--ink);
+    border-bottom: 1px solid var(--line);
     transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 
 .card a:hover {
-    background: var(--blue);
-    color: var(--bg);
-    border-bottom-color: var(--blue);
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-bottom-color: var(--accent);
 }
 
 /* ==========================================================
-   АРХИВ
+   11. АРХИВ
    ========================================================== */
 .archive-list {
     list-style: none;
@@ -551,14 +834,14 @@ body::before {
     align-items: baseline;
     gap: 16px;
     padding: 16px 20px;
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid var(--line-soft);
     font-size: 0.9rem;
-    background: var(--paper);
+    background: var(--panel-soft);
     transition: background 0.15s;
 }
 
 .archive-list li:last-child { border-bottom: none; }
-.archive-list li:hover { background: var(--paper-deep); }
+.archive-list li:hover { background: var(--panel-hover); }
 
 .archive-list a {
     color: var(--ink);
@@ -566,7 +849,7 @@ body::before {
     font-weight: 700;
 }
 
-.archive-list a:hover { color: var(--red); }
+.archive-list a:hover { color: var(--accent-2); }
 
 .archive-list .date {
     font-size: 0.72rem;
@@ -576,10 +859,10 @@ body::before {
 }
 
 /* ==========================================================
-   СТАТЬЯ
+   12. СТАТЬЯ
    ========================================================== */
 .post-header {
-    border-bottom: 2px solid var(--line);
+    border-bottom: 1px solid var(--line);
     padding-bottom: 20px;
     margin-bottom: 28px;
 }
@@ -593,6 +876,7 @@ body::before {
     letter-spacing: 0.01em;
     color: var(--ink);
     text-transform: uppercase;
+    text-shadow: var(--brand-glow);
 }
 
 .post-meta {
@@ -604,7 +888,7 @@ body::before {
 
 .post-meta::before {
     content: "◆ ";
-    color: var(--red);
+    color: var(--accent-2);
 }
 
 .post-body p {
@@ -617,14 +901,14 @@ body::before {
 .post-body a {
     color: var(--ink);
     text-decoration: none;
-    border-bottom: 1px solid var(--ink);
+    border-bottom: 1px solid var(--line);
     transition: background 0.15s, color 0.15s;
 }
 
 .post-body a:hover {
-    background: var(--blue);
-    color: var(--bg);
-    border-bottom-color: var(--blue);
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-bottom-color: var(--accent);
 }
 
 .post-nav {
@@ -647,12 +931,12 @@ body::before {
 }
 
 .post-nav a:hover {
-    border-bottom-color: var(--red);
-    color: var(--red);
+    border-bottom-color: var(--accent-2);
+    color: var(--accent-2);
 }
 
 /* ==========================================================
-   ИГРЫ
+   13. ИГРЫ
    ========================================================== */
 .games-grid {
     display: grid;
@@ -662,25 +946,29 @@ body::before {
 }
 
 .game-card {
-    background: var(--paper);
+    background: var(--panel);
     border: 1px solid var(--line);
     padding: 22px 20px;
     display: flex;
     flex-direction: column;
     position: relative;
-    transition: box-shadow 0.15s, transform 0.15s, border-color 0.15s;
+    transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s, background 0.25s;
+    backdrop-filter: var(--panel-backdrop);
+    -webkit-backdrop-filter: var(--panel-backdrop);
 }
 
 .game-card:hover {
-    box-shadow: 4px 4px 0 0 var(--blue);
-    border-color: var(--blue);
-    transform: translate(-2px, -2px);
+    background: var(--panel-hover);
+    box-shadow: 0 0 0 1px var(--line-soft),
+                0 12px 40px -12px var(--glow-soft);
+    border-color: var(--accent);
+    transform: translateY(-3px);
 }
 
 .game-card .icon {
     font-size: 0.7rem;
     letter-spacing: 2.5px;
-    color: var(--red);
+    color: var(--accent-2);
     margin-bottom: 14px;
     text-transform: uppercase;
 }
@@ -707,7 +995,7 @@ body::before {
 .game-card .tags {
     font-size: 0.68rem;
     letter-spacing: 2.5px;
-    color: var(--blue);
+    color: var(--accent);
     margin-bottom: 16px;
     text-transform: uppercase;
 }
@@ -719,20 +1007,20 @@ body::before {
     font-size: 0.75rem;
     letter-spacing: 2px;
     text-transform: uppercase;
-    border: 1px solid var(--ink);
+    border: 1px solid var(--line);
     padding: 8px 14px;
     align-self: flex-start;
     transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 
 .game-card a:hover {
-    background: var(--blue);
-    color: var(--bg);
-    border-color: var(--blue);
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-color: var(--accent);
 }
 
 /* ==========================================================
-   ПОДВАЛ
+   14. ПОДВАЛ
    ========================================================== */
 .footer {
     padding: 22px 30px;
@@ -742,65 +1030,62 @@ body::before {
     letter-spacing: 2.5px;
     color: var(--ink-soft);
     text-transform: uppercase;
-    background: var(--paper-deep);
+    background: var(--panel-soft);
     position: relative;
     z-index: 2;
+    transition: background 0.25s ease, border-color 0.25s ease;
 }
 
 .footer::before {
     content: "◆";
-    color: var(--red);
+    color: var(--accent-2);
     margin-right: 8px;
 }
 
 .footer::after {
     content: "◆";
-    color: var(--red);
+    color: var(--accent-2);
     margin-left: 8px;
 }
 
 /* ==========================================================
-   ВЫДЕЛЕНИЕ / СКРОЛЛБАР
+   15. ВЫДЕЛЕНИЕ / СКРОЛЛБАР
    ========================================================== */
 ::selection {
-    background: var(--yellow);
-    color: var(--bg);
+    background: var(--accent-3);
+    color: var(--accent-ink);
 }
 
 ::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: var(--paper-deep); }
-::-webkit-scrollbar-thumb { background: var(--ink-faint); }
-::-webkit-scrollbar-thumb:hover { background: var(--red); }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb {
+    background: var(--line-soft);
+    border: 1px solid var(--line);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
 /* ==========================================================
-   АДАПТИВНОСТЬ
+   16. АДАПТИВНОСТЬ
    ========================================================== */
+
+/* На узких экранах японская плашка СОХРАНЯЕТ вертикальную
+   ориентацию и остаётся слева от DUDE7OX. Под брендом
+   уезжает только правая колонка (cover-label). */
 @media (max-width: 900px) {
     .header {
-        grid-template-columns: 1fr;
+        grid-template-columns: auto 1fr;
         padding: 26px 22px 22px;
         gap: 20px;
     }
 
-    .jp-strip {
+    .cover-label {
+        grid-column: 1 / -1;
         flex-direction: row;
         justify-content: center;
-        padding: 8px 12px;
-    }
-
-    .jp-strip .jp-vertical,
-    .jp-strip .jp-mark {
-        writing-mode: horizontal-tb;
-        transform: none;
-    }
-
-    .cover-label,
-    .cover-label.right {
-        text-align: center;
         align-items: center;
-        flex-direction: row;
-        justify-content: center;
         gap: 14px;
+        text-align: center;
+        padding-top: 4px;
     }
 
     .cover-label span:first-child::after {
@@ -811,7 +1096,19 @@ body::before {
 
 @media (max-width: 600px) {
     body { padding: 10px; }
-    .container { box-shadow: 4px 4px 0 0 #000; }
+
+    .cover-top {
+        flex-wrap: wrap;
+        row-gap: 8px;
+    }
+
+    .cover-top-right {
+        width: 100%;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .theme-btn { width: 8px; height: 8px; }
 
     .cover-top, .cover-bottom {
         padding: 8px 14px;
@@ -819,8 +1116,21 @@ body::before {
         letter-spacing: 1.5px;
     }
 
-    .header { padding: 22px 16px 18px; }
-    .brand h1 { font-size: 3.4rem; }
+    .header {
+        padding: 22px 16px 18px;
+        gap: 14px;
+    }
+
+    /* Плашку слегка ужимаем — на телефоне она выше, чем бренд */
+    .jp-strip {
+        padding: 8px 6px;
+        gap: 8px;
+    }
+
+    .jp-strip .jp-vertical { font-size: 0.8rem; }
+    .jp-strip .jp-mark     { font-size: 0.5rem; }
+
+    .brand h1 { font-size: 3rem; }
 
     .nav {
         gap: 18px;

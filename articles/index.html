@@ -1,10 +1,22 @@
 <!-- Сделано Dude7ox -->
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="night">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Статьи · Dude7ox</title>
+    <meta name="theme-color" content="#0d1014">
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem('theme') || 'night';
+                if (t === 'paper')   t = 'night';
+                if (t === 'emerald') t = 'night';
+                if (t === 'orange')  t = 'coffee';
+                document.documentElement.setAttribute('data-theme', t);
+            } catch (e) {}
+        })();
+    </script>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -14,7 +26,18 @@
 
             <div class="cover-top">
                 <span>DUDE7OX.PERSONAL</span>
-                <span>V.1.0 / 2026</span>
+
+                <div class="cover-top-right">
+                    <span>V.1.0 / 2026</span>
+
+                    <div class="theme-switcher" role="group" aria-label="Выбор темы">
+                        <button class="theme-btn" data-theme-target="night"  title="Ночь"            aria-label="Ночь"></button>
+                        <button class="theme-btn" data-theme-target="sea"    title="Морская волна"    aria-label="Морская волна"></button>
+                        <button class="theme-btn" data-theme-target="coffee" title="Кофе с молоком"   aria-label="Кофе с молоком"></button>
+                        <button class="theme-btn" data-theme-target="wine"   title="Бордовый"         aria-label="Бордовый"></button>
+                        <button class="theme-btn" data-theme-target="light"  title="Светло-серый"     aria-label="Светло-серый"></button>
+                    </div>
+                </div>
             </div>
 
             <div class="header">
@@ -108,9 +131,31 @@
             });
         })();
 
+        const root = document.documentElement;
+        const themeButtons = document.querySelectorAll('.theme-btn');
+
+        function applyTheme(theme) {
+            root.setAttribute('data-theme', theme);
+            try { localStorage.setItem('theme', theme); } catch (e) {}
+            themeButtons.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.themeTarget === theme);
+            });
+            updateWaveColor();
+        }
+
+        themeButtons.forEach(btn => {
+            btn.addEventListener('click', () => applyTheme(btn.dataset.themeTarget));
+        });
+
         const canvas = document.getElementById('xmbCanvas');
         const ctx = canvas.getContext('2d');
         let width, height;
+        let waveRgb = '255, 255, 255';
+
+        function updateWaveColor() {
+            const v = getComputedStyle(root).getPropertyValue('--wave-rgb').trim();
+            waveRgb = v || '255, 255, 255';
+        }
 
         function resize() {
             if (!canvas.parentElement) return;
@@ -131,7 +176,6 @@
             { frequency: 0.003, amplitude: 24, speed:  0.005, opacity: 0.09, phaseShift: Math.PI / 1.5, baseHeight: 0.85 }
         ];
 
-        const WAVE_COLOR = 'rgba(91, 184, 232, ';
         let increment = 0;
 
         function animate() {
@@ -140,7 +184,7 @@
 
             waves.forEach(wave => {
                 ctx.beginPath();
-                ctx.fillStyle = WAVE_COLOR + wave.opacity + ')';
+                ctx.fillStyle = 'rgba(' + waveRgb + ', ' + wave.opacity + ')';
 
                 for (let x = 0; x <= width; x++) {
                     const y = (height * wave.baseHeight) +
@@ -160,7 +204,12 @@
             requestAnimationFrame(animate);
         }
 
-        window.addEventListener('load', () => { resize(); animate(); });
+        window.addEventListener('load', () => {
+            const saved = root.getAttribute('data-theme') || 'night';
+            applyTheme(saved);
+            resize();
+            animate();
+        });
     </script>
 </body>
 </html>
