@@ -236,11 +236,11 @@ html, body {
     -webkit-font-smoothing: antialiased;
 }
 
-body {
+/*body {
     padding: 24px;
     position: relative;
     transition: background 0.25s ease, color 0.25s ease;
-}
+}*/
 
 body::before {
     content: "";
